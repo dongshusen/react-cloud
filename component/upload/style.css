@@ -1,0 +1,19 @@
+.common-label {
+    padding: 4px 8px;
+}
+
+.ds-upload {
+    width: 50%;
+    text-align: left;
+}
+
+.ds-upload-load-box {
+    line-height: 78px;
+    text-align: center;
+    border: 1px dashed;
+    font-size: 20px;
+    width: 78px;
+    height: 78px;
+    color: #03a9f4;
+    cursor: pointer;
+}

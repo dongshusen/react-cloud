@@ -1,0 +1,32 @@
+{
+  "name": "my-react",
+  "version": "1.0.0",
+  "description": "http://1.12.251.84:8888",
+  "main": "index.js",
+  "proxy": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --config webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jquery": "^3.5.14",
+    "@types/react": "^17.0.40",
+    "@types/react-dom": "^17.0.13",
+    "axios": "^0.26.1",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.2",
+    "style-loader": "^3.3.1",
+    "typescript": "^4.6.2",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  },
+  "devDependencies": {
+    "ts-loader": "^9.2.8"
+  }
+}

@@ -1,0 +1,25 @@
+.ds-button {
+    line-height: 30px;
+    width: 80px;
+    height: 30px;
+    margin: 0 6px;
+    border: 1px solid rgb(228, 223, 223);
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.ds-last-button {
+    margin-right: 0;
+}
+
+.ds-main-button {
+    background-color: rgb(12, 69, 145);
+    color: white;
+}
+
+.ds-button-group {
+    width: -webkit-fill-available;
+    direction: rtl;
+    display: flex;
+}
