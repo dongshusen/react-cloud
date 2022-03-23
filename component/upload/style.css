@@ -17,3 +17,21 @@
     color: #03a9f4;
     cursor: pointer;
 }
+
+.ds-upload-files {
+    display: flex;
+}
+
+.ds-uploaded-files {
+    display: grid;
+}
+
+.ds-uploaded-file_name {
+    font-size: 12px;
+    width: 80px;
+    text-align: center;
+}
+
+.ds-upload-none-input {
+    display: none;
+}

@@ -24,6 +24,21 @@ module.exports = (env, argv) => {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader'],
                 exclude: /node_modules/,
+            }, {
+                test: /\.(gif|png|jpg|ico|svg)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 10240,
+                            esModule: false,
+                            options: {
+
+                            },
+                            name: "[path][name].[hash].[ext]"
+                        }
+                    }
+                ]
             }]
         },
         plugins: [
@@ -34,21 +49,24 @@ module.exports = (env, argv) => {
         ],
         devServer: {
             port: 3008,
-            proxy: {
+            // proxy: {
+            //     '/ds_service': {
+            //         target: env.proxy_host,//代理地址，这里设置的地址会代替axios中设置的baseURLhttp://180.76.135.45:8888
+            //         changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
+            //     }, '/upload': {
+            //         target: env.proxy_host,//代理地址，这里设置的地址会代替axios中设置的baseURLhttp://180.76.135.45:8888
+            //         changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
+            //     }
+            // }
+            proxy: [{
                 context: [
                     '/ds_service',
-                    '/upload'
+                    '/upload',
+                    '/img'
                 ],
                 target: env.proxy_host,//代理地址，这里设置的地址会代替axios中设置的baseURLhttp://180.76.135.45:8888
                 changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
-                //ws: true, // proxy websockets
-                //pathRewrite方法重写url
-                // pathRewrite: {
-                //     '^/api': '/'
-                //     //pathRewrite: {'^/api': '/'} 重写之后url为 http://192.168.1.16:8085/xxxx
-                //     //pathRewrite: {'^/api': '/api'} 重写之后url为 http://192.168.1.16:8085/api/xxxx
-                // }
-            }
+            }]
         },
         watchOptions: {
             ignored: /node_modules/

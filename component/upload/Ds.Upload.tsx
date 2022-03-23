@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css"
+import ReactDom from "react-dom"
 const axios = require('axios');
 
 
@@ -12,12 +13,26 @@ interface commomComponentOptions {
 
 const DsUploadExcel: React.FC<commomComponentOptions> = (props: commomComponentOptions) => {
     var input_ref: any = React.createRef();
+    var upload_ref: any = React.createRef();
 
     const setDialogData = props.$setDialogData;
     var file_index: string = ''
 
     const onvalueChange = (_v: any) => {
-        if (_v) file_index = _v
+        if (_v) {
+            let upload_dom = upload_ref.current
+            ReactDom.render(
+                <div className="ds-upload-files">
+                    <div className="ds-uploaded-files">
+                        <img src="/img?img_name=excel.png" alt="啊哦，图片不见了" width="80px" />
+                        <span className="ds-uploaded-file_name">{_v}</span>
+                    </div>
+                    <div className='ds-upload-load-box' onClick={chooseFile}>+</div>
+                </div>
+                    ,
+                upload_dom
+            )
+        }
 
         let data: { [p: string]: any } = {}
         data[props.dsKey] = _v
@@ -33,7 +48,7 @@ const DsUploadExcel: React.FC<commomComponentOptions> = (props: commomComponentO
             data: formdata,
             headers: { 'Content-Type': 'multipart/form-data' }
         }).then(function (res: any) {
-            onvalueChange(res.index)
+            onvalueChange(res.data.file_index)
         }, function (err: any) {
             onvalueChange(null)
         })
@@ -48,14 +63,21 @@ const DsUploadExcel: React.FC<commomComponentOptions> = (props: commomComponentO
         file_index !== '' && (pre_label += file_index)
         return pre_label
     }
+    const setUploadDom = () => {
+
+    }
 
 
     return (
         <div>
-            <input name="file" type="file" accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ref={input_ref} onChange={fileChange} multiple />
+            <input className="ds-upload-none-input" name="file" type="file" accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ref={input_ref} onChange={fileChange} multiple />
             <div className="ds-upload" id={props.dsKey}>
-                <span className="common-label">{parseLabel()}</span>
-                <div className='ds-upload-load-box' onClick={chooseFile}>+</div>
+                <span className="common-label">{props.dsLabel}</span>
+                <div ref={upload_ref}>
+                    <div className="ds-upload-files">
+                        <div className='ds-upload-load-box' onClick={chooseFile}>+</div>
+                    </div>
+                </div>
             </div>
         </div>
     )
